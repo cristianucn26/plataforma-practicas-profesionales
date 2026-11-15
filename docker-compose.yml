@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: practicas_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: practicas_db
+      POSTGRES_USER: practicas
+      POSTGRES_PASSWORD: practicas_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - practicas_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+volumes:
+  practicas_data:
